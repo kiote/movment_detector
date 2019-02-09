@@ -23,7 +23,7 @@ def main():
         contours = getContours(skinMask)
         ## Darw contours
         cv2.drawContours(frame1, contours, -1, (0, 255, 0), 2)
-        cv2.imshow('capture', frame1)
+        # cv2.imshow('capture', frame1)
 
         # Create an image based on the differences between the two frames and then enhance the result
         diffImg = cv2.absdiff(frame1, frame2)
