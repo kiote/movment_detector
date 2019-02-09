@@ -69,7 +69,7 @@ def getContours(img):
 def HSVBin(img):
     hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
 
-    lower_skin = np.array([50, 50, 0])
+    lower_skin = np.array([50, 45, 0])
     upper_skin = np.array([125, 125, 255])
 
     mask = cv2.inRange(hsv, lower_skin, upper_skin)
