@@ -1,2 +1,2 @@
-import cv2.cv as cv
-print(cv2.__version__)
+import cv2 as cv
+print(cv.__version__)
