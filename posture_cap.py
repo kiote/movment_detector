@@ -27,6 +27,7 @@ def getContours(img):
             # rect = cv2.minAreaRect(cont)
             # box = cv2.cv.BoxPoints(rect)
             # validContours.append(np.int0(box))
+    print('validContours: {}'.format(len(validContours)))
     return validContours
 
 def HSVBin(img):
