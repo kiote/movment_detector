@@ -35,7 +35,6 @@ def processPicture(amountOfMovement, whitePixels):
         spin = 1
 
     print('{}:{}'.format(boundaries(amountOfMovement, 0, 100), spin))
-        
 
 cap = cv2.VideoCapture(0)
 
