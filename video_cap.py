@@ -18,7 +18,14 @@ while(True):
  
 
     # Display the resulting frame
-    cv2.imshow('frame',fgmask)
+    cv2.imshow('frame', fgmask)
+
+    whitePixels = cv2.findNonZero(fgmask)
+
+    if whitePixels is not None:
+        amountOfMovement = len(whitePixels)
+        print(amountOfMovement)
+    
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
