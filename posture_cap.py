@@ -44,7 +44,7 @@ def main():
             amountOfMovement = len(whitePixels)
             if (amountOfMovement > THRESHOLD and amountOfMovement < FALSE_POSITIVE):
                 movement = boundaries(amountOfMovement, 0, 100)
-                print('movement: {}, countours: {}'.format(movement, contours))
+                print('movement: {}, countours: {}'.format(movement, len(contours)))
 
         frame1 = frame2
         if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -64,7 +64,7 @@ def getContours(img):
             # rect = cv2.minAreaRect(cont)
             # box = cv2.cv.BoxPoints(rect)
             # validContours.append(np.int0(box))
-    return len(validContours)
+    return validContours
 
 def HSVBin(img):
     hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
