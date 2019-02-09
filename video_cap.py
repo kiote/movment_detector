@@ -3,6 +3,40 @@ import cv2
 import time
 
 THRESHOLD = 600
+FALSE_POSITIVE = 20000
+
+def processPicture(amountOfMovement, whitePixels):
+    # print(amountOfMovement)
+    whitePixelsList = whitePixels.tolist()
+
+    whitePixelsXValues = []
+    whitePixelsYValues = []
+
+    for nestedLists in whitePixelsList:
+        for singleList in nestedLists:
+            whitePixelsXValues.append(singleList[0])
+            whitePixelsYValues.append(singleList[1])
+
+    # print('whitePixelsXValues: {}'.format(whitePixelsXValues)))
+    # print('whiteXsum: {}'.format(sum(whitePixelsXValues)))
+    # print('whiteYsum: {}'.format(sum(whitePixelsYValues)))
+
+    xMinimum = min(whitePixelsXValues)
+    xMaximum = max(whitePixelsXValues)
+    xDifference = xMaximum - xMinimum
+
+    yMinimum = min(whitePixelsYValues)
+    yMaximum = max(whitePixelsYValues)
+    yDifference = yMaximum - yMinimum
+
+    # print('xDifference: {}, yDifference: {}'.format(xDifference, yDifference))
+    if (xDifference > yDifference):
+        if ((xDifference-yDifference) > 600):
+            print('More on X: {}'.format(xDifference-yDifference))
+        else:
+            print('More on Y: {}'.format(xDifference-yDifference))
+    else:
+        print('More on Y: {}'.format(yDifference-xDifference))
 
 cap = cv2.VideoCapture(0)
 
@@ -36,8 +70,9 @@ while(True):
 
     if whitePixels is not None:
         amountOfMovement = len(whitePixels)
-        if (amountOfMovement > THRESHOLD):
-            print(amountOfMovement)
+        # print(amountOfMovement)
+        if (amountOfMovement > THRESHOLD and amountOfMovement < FALSE_POSITIVE):
+            processPicture(amountOfMovement, whitePixels)
     
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
