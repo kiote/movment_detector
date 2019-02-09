@@ -6,10 +6,14 @@ THRESHOLD = 600
 FALSE_POSITIVE = 20000
 PIXEL_INTENSITY_THRESHOLD = 20
 
-def boundaries(number, min, max):
-    normalized = (number - min) / max
-    return int(round(normalized))
-
+def boundaries(number, mmin, mmax):
+    scaled = int(number / mmax)
+    if scaled < mmin:
+        scaled = mmin
+    if scaled > mmax:
+        scaled = mmax
+    return scaled
+    
 def processPicture(amountOfMovement, whitePixels):
     # print(amountOfMovement)
     whitePixelsList = whitePixels.tolist()
