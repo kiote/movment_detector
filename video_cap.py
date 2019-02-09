@@ -8,10 +8,10 @@ PIXEL_INTENSITY_THRESHOLD = 20
 
 def boundaries(number, min, max):
     normalized = (number - min) / max
-    return normalized
+    return int(round(normalized))
 
 def processPicture(amountOfMovement, whitePixels):
-    print(amountOfMovement)
+    # print(amountOfMovement)
     whitePixelsList = whitePixels.tolist()
 
     whitePixelsXValues = []
