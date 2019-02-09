@@ -2,6 +2,8 @@ import numpy as np
 import cv2
 import time
 
+THRESHOLD = 600
+
 cap = cv2.VideoCapture(0)
 
 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
@@ -34,7 +36,8 @@ while(True):
 
     if whitePixels is not None:
         amountOfMovement = len(whitePixels)
-        print(amountOfMovement)
+        if (amountOfMovement > THRESHOLD):
+            print(amountOfMovement)
     
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
