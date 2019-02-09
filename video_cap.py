@@ -4,6 +4,11 @@ import time
 
 THRESHOLD = 600
 FALSE_POSITIVE = 20000
+PIXEL_INTENSITY_THRESHOLD = 20
+
+def boundaries(number, min, max):
+    normalized = (number - min) / max
+    return normalized
 
 def processPicture(amountOfMovement, whitePixels):
     print(amountOfMovement)
@@ -20,11 +25,12 @@ def processPicture(amountOfMovement, whitePixels):
     sumOfX = sum(whitePixelsXValues)
     sumOfY = sum(whitePixelsYValues)
 
-    print('sumOfX: {}, sumOfY: {}'.format(sumOfX, sumOfY))
+    # print('sumOfX: {}, sumOfY: {}'.format(sumOfX, sumOfY))
+    spin = 0
     if (sumOfX > sumOfY + 1000):
-        print('More on X: {}'.format(sumOfX))
-    else:
-        print('More on Y: {}'.format(sumOfY))
+        spin = 1
+
+    print('{}:{}'.format(boundaries(amountOfMovement, 0, 100), spin))
         
 
 cap = cv2.VideoCapture(0)
@@ -40,10 +46,10 @@ while(True):
 
     # Create an image based on the differences between the two frames and then enhance the result
     diffImg = cv2.absdiff(frame1, frame2)
-    # threshImg = cv2.threshold(diffImg, PIXEL_INTENSITY_THRESHOLD, 255, cv2.THRESH_BINARY)[1]
+    threshImg = cv2.threshold(diffImg, PIXEL_INTENSITY_THRESHOLD, 255, cv2.THRESH_BINARY)[1]
 
     # Our operations on the frame come here
-    gray = cv2.cvtColor(diffImg, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(threshImg, cv2.COLOR_BGR2GRAY)
     fgmask = fgbg.apply(gray)
     fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, kernel)
 
