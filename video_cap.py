@@ -6,7 +6,7 @@ THRESHOLD = 600
 FALSE_POSITIVE = 20000
 
 def processPicture(amountOfMovement, whitePixels):
-    # print(amountOfMovement)
+    print(amountOfMovement)
     whitePixelsList = whitePixels.tolist()
 
     whitePixelsXValues = []
@@ -17,26 +17,15 @@ def processPicture(amountOfMovement, whitePixels):
             whitePixelsXValues.append(singleList[0])
             whitePixelsYValues.append(singleList[1])
 
-    # print('whitePixelsXValues: {}'.format(whitePixelsXValues)))
-    # print('whiteXsum: {}'.format(sum(whitePixelsXValues)))
-    # print('whiteYsum: {}'.format(sum(whitePixelsYValues)))
+    sumOfX = sum(whitePixelsXValues)
+    sumOfY = sum(whitePixelsYValues)
 
-    xMinimum = min(whitePixelsXValues)
-    xMaximum = max(whitePixelsXValues)
-    xDifference = xMaximum - xMinimum
-
-    yMinimum = min(whitePixelsYValues)
-    yMaximum = max(whitePixelsYValues)
-    yDifference = yMaximum - yMinimum
-
-    # print('xDifference: {}, yDifference: {}'.format(xDifference, yDifference))
-    if (xDifference > yDifference):
-        if ((xDifference-yDifference) > 600):
-            print('More on X: {}'.format(xDifference-yDifference))
-        else:
-            print('More on Y: {}'.format(xDifference-yDifference))
+    print('sumOfX: {}, sumOfY: {}'.format(sumOfX, sumOfY))
+    if (sumOfX > sumOfY + 1000):
+        print('More on X: {}'.format(sumOfX))
     else:
-        print('More on Y: {}'.format(yDifference-xDifference))
+        print('More on Y: {}'.format(sumOfY))
+        
 
 cap = cv2.VideoCapture(0)
 
